@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeAI@UAI 2026 — 2nd Workshop on Safe AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #080f1a;
+    --navy-mid: #0f1e30;
+    --navy-card: #0d1928;
+    --accent: #f07340;
+    --accent-light: #f9a06a;
+    --accent-glow: rgba(240,115,64,0.25);
+    --cyan: #22d3ee;
+    --cyan-dim: rgba(34,211,238,0.12);
+    --cyan-glow: rgba(34,211,238,0.2);
+    --teal: #3a80b8;
+    --teal-light: #7ab8e0;
+    --off-white: #f6f4ef;
+    --muted: #6a7a8a;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(34,211,238,0.15);
+    --card-bg: rgba(13,25,40,0.7);
+    --text-main: #eef2f6;
+    --text-secondary: #94aabf;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--navy);
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(34,211,238,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(240,115,64,0.05) 0%, transparent 40%),
+      radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 28px 28px;
+    color: var(--text-main);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,15,26,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-accent);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-weight: 700;
+    font-size: 15px;
+    background: linear-gradient(90deg, var(--cyan), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 0 1rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s;
+    border-bottom: 2px solid transparent;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover {
+    color: var(--cyan);
+    border-bottom-color: var(--cyan);
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 120px 2rem 100px;
+    text-align: center;
+    background: url('images/hero.jpg') center/cover no-repeat;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 70% at 50% 45%, rgba(8,15,26,0.52) 0%, transparent 100%),
+      linear-gradient(
+        to bottom,
+        rgba(8,15,26,0.35) 0%,
+        rgba(8,15,26,0.4) 40%,
+        rgba(8,15,26,0.4) 60%,
+        rgba(8,15,26,0.7) 100%
+      );
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, var(--navy));
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 20px rgba(255,255,255,0.08);
+    backdrop-filter: blur(4px);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #fff;
+    max-width: 800px;
+    margin: 0 auto 0.6rem;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.3);
+  }
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(90deg, #ffd080, #ffb060);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-subtitle {
+    font-size: 1.6rem;
+    color: rgba(255,255,255,0.88);
+    max-width: 680px;
+    margin: 0.5rem auto 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .hero-subtitle em {
+    font-style: normal;
+    color: #ffd080;
+    font-weight: 500;
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+  .hero-meta-item svg { opacity: 0.9; }
+  .hero-meta-item strong { color: #fff; font-weight: 600; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #ff8c42, #f06030);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 20px rgba(240,96,48,0.4);
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { box-shadow: 0 6px 32px rgba(240,96,48,0.55); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.35);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.2); box-shadow: 0 4px 20px rgba(255,255,255,0.12); transform: translateY(-2px); }
+  .hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── BODY SECTIONS ── */
+  .page-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Section anchors */
+  .section {
+    padding: 2.5rem 2rem 2.5rem;
+    border: 1px solid var(--border-accent);
+    border-radius: 16px;
+    margin-top: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(4px);
+    position: relative;
+    overflow: hidden;
+  }
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--accent), transparent);
+    opacity: 0.6;
+    border-radius: 16px 16px 0 0;
+  }
+  .section:first-child { margin-top: 2rem; }
+
+  h2.sec-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    background: linear-gradient(100deg, #fff 40%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.4rem;
+    line-height: 1.25;
+  }
+  h2.sec-title::after {
+    content: none;
+  }
+
+  /* Body prose */
+  .prose {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 0.97rem;
+  }
+  .prose p + p { margin-top: 0.9rem; }
+  .prose strong { color: var(--text-main); font-weight: 500; }
+  .prose em { font-style: italic; }
+  .prose a { color: var(--accent-light); text-decoration: none; }
+  .prose a:hover { text-decoration: underline; }
+
+  /* Deadlines table */
+  .dates-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .dates-table tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  .dates-table tr:last-child { border-bottom: none; }
+  .dates-table tr:hover { background: rgba(34,211,238,0.04); }
+  .dates-table tr.highlight { background: rgba(240,115,64,0.06); border-bottom-color: rgba(240,115,64,0.15); }
+  .dates-table tr.highlight td { color: #fff; }
+  .dates-table tr.highlight td:first-child::before {
+    content: '▸ ';
+    color: var(--accent);
+  }
+  .dates-table td {
+    padding: 0.7rem 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .dates-table td:first-child {
+    width: 200px;
+    color: var(--text-main);
+    font-weight: 500;
+    white-space: nowrap;
+    padding-right: 2rem;
+  }
+  .dates-table tr.highlight td:first-child { color: var(--accent-light); }
+  .strike { text-decoration: line-through; opacity: 0.45; }
+
+  /* Topics — indented nested lists like GRaM */
+  .topics-prose h3 {
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 1.4rem 0 0.3rem;
+  }
+  .topics-prose ul {
+    padding-left: 1.4rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+  .topics-prose ul li { margin: 0.15rem 0; }
+
+  /* Speakers */
+  .speakers-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.85rem;
+    margin-top: 1.25rem;
+  }
+  .speaker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: rgba(34,211,238,0.05);
+    border: 1px solid rgba(34,211,238,0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .speaker-item:hover {
+    background: rgba(34,211,238,0.09);
+    border-color: rgba(34,211,238,0.28);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(34,211,238,0.08);
+  }
+  .s-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(34,211,238,0.1);
+    border: 1px solid rgba(34,211,238,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--cyan);
+    flex-shrink: 0;
+  }
+  .s-info strong { display: block; font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
+  .s-info span { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; display: block; }
+  .more-speakers {
+    margin-top: 0.75rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Submission */
+  .sub-list {
+    padding-left: 1.4rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-top: 0.5rem;
+  }
+  .sub-list li { margin: 0.2rem 0; }
+  .sub-list strong { color: var(--text-main); font-weight: 500; }
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--accent), #e05a28);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 10px 26px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 20px var(--accent-glow);
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .submit-btn:hover { box-shadow: 0 0 32px rgba(240,115,64,0.45); transform: translateY(-2px); }
+
+  /* Organizers — photo grid like GRaM */
+  .org-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.8rem 1.2rem;
+    margin-top: 1.25rem;
+  }
+  .org-item { text-align: center; transition: transform 0.2s; }
+  .org-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(232,131,74,0.08);
+    border: 2px solid rgba(232,131,74,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--accent-light);
+    margin: 0 auto 0.6rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .org-item:hover { transform: translateY(-4px); }
+  .org-item:hover .org-photo {
+    box-shadow: 0 0 0 3px rgba(232,131,74,0.35), 0 6px 20px rgba(232,131,74,0.15);
+    border-color: rgba(232,131,74,0.5);
+  }
+  .org-photo::before {
+    content: attr(data-initials);
+  }
+  .org-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 50%;
+  }
+  .org-item strong { display: block; font-size: 0.95rem; color: var(--text-main); font-weight: 500; line-height: 1.3; }
+  .org-item .org-role { font-size: 0.72rem; color: var(--accent-light); font-weight: 600; display: inline-block; margin-bottom: 5px; background: rgba(232,131,74,0.12); border: 1px solid rgba(232,131,74,0.22); border-radius: 100px; padding: 2px 10px; letter-spacing: 0.03em; }
+  .org-item span { display: block; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; }
+
+  /* Sub-section title within a card */
+  .sec-subtitle {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  /* PC members placeholder */
+  .pc-placeholder {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.95rem;
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+
+  /* Intro blurb */
+  .intro-blurb {
+    max-width: 900px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  .intro-blurb strong { color: var(--text-main); font-weight: 500; }
+  .intro-blurb a { color: var(--accent-light); text-decoration: none; }
+  .intro-blurb a:hover { text-decoration: underline; }
+
+  /* Panel topics */
+  .panel-list {
+    padding-left: 1.4rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-top: 0.5rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border-accent);
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    background: linear-gradient(to bottom, transparent, rgba(34,211,238,0.03));
+  }
+  footer a { color: var(--cyan); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .hero { padding: 70px 1.25rem 60px; }
+    .page-body { padding: 0 1.25rem; }
+    .dates-table td:first-child { width: 140px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">SafeAI@UAI 2026</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#dates">Dates</a></li>
+    <li><a href="#speakers">Speakers</a></li>
+    <li><a href="#submission">Call for Papers</a></li>
+    <li><a href="#organizers">Organizers</a></li>
+    <li><a href="#pc">PC</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+
+  <div style="position:relative;z-index:3;">
+    <div class="hero-badge">UAI 2026 Workshop &nbsp;·&nbsp; Amsterdam</div>
+    <h1>2nd Workshop on <em>Safe AI</em></h1>
+    <p class="hero-subtitle">Towards Trustworthy <em>Agentic AI</em></p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <strong>Friday, 21 August 2026</strong>
+      </div>
+      <div class="hero-meta-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <strong>Amsterdam, Netherlands</strong>
+      </div>
+      <div class="hero-meta-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <strong>Full-day · In person</strong>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#submission" class="btn-primary">Submit a paper</a>
+      <a href="https://www.auai.org/uai2026/" class="btn-outline" target="_blank" rel="noopener">UAI 2026 ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- Intro blurb -->
+<div class="intro-blurb">
+  We are pleased to announce the <strong>2nd Workshop on Safe AI (SafeAI)</strong>, held as part of <a href="https://www.auai.org/uai2026/" target="_blank" rel="noopener">UAI 2026</a> in Amsterdam. This year's edition focuses on <strong>safety challenges in agentic AI</strong> — systems that autonomously act, adapt, and interact over extended horizons. The workshop features invited talks, a panel discussion, and contributed papers spanning foundations, robustness, interpretability, and deployment of safe AI systems.
+</div>
+
+<div class="page-body">
+
+  <!-- IMPORTANT DATES -->
+  <div class="section" id="dates">
+    <h2 class="sec-title">Important dates</h2>
+    <div class="prose"><p>All deadlines are end of day <strong>Anywhere on Earth (AoE)</strong>.</p></div>
+    <table class="dates-table">
+      <tr>
+        <td>Apr 9, 2026</td>
+        <td>Call for papers released</td>
+      </tr>
+      <tr>
+        <td>May 28, 2026</td>
+        <td>Paper submission deadline</td>
+      </tr>
+      <tr>
+        <td>Jun 1–16, 2026</td>
+        <td>Reviewing period</td>
+      </tr>
+      <tr>
+        <td>Jun 18, 2026</td>
+        <td>Author notification</td>
+      </tr>
+      <tr>
+        <td>Jul 2, 2026</td>
+        <td>Camera-ready deadline</td>
+      </tr>
+      <tr>
+        <td>Jul 9, 2026</td>
+        <td>Program &amp; papers online</td>
+      </tr>
+      <tr class="highlight">
+        <td>Aug 21, 2026</td>
+        <td>Workshop day — Amsterdam</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- CALL FOR PAPERS + TOPICS -->
+  <div class="section" id="submission">
+    <h2 class="sec-title">Call for papers</h2>
+    <div class="prose">
+      <p>We invite two categories of submissions:</p>
+    </div>
+    <ul class="sub-list">
+      <li><strong>Category A — Original papers:</strong> UAI-style formatting, same length restrictions as the main conference.</li>
+      <li><strong>Category B — Extended abstracts:</strong> 2 pages, for papers accepted elsewhere and for invited presentation pitches.</li>
+    </ul>
+    <div class="prose" style="margin-top:1.25rem;">
+      <p><strong>Review process:</strong> Single-blind peer review by the program committee. At least one author must attend in person. There will be no proceedings, so authors are free to submit their work elsewhere. A journal special issue may be considered.</p>
+    </div>
+    <a href="https://openreview.net" class="submit-btn" target="_blank" rel="noopener">Submit on OpenReview ↗</a>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:2.5rem 0 2rem;">
+
+    <h3 id="topics" class="sec-subtitle">Topics of interest</h3>
+    <div class="prose" style="margin-bottom:0.5rem;">
+      <p>We solicit submissions presenting original research, theoretical results, and applied work within the following topics (list not exhaustive).</p>
+    </div>
+    <div class="topics-prose">
+      <h3>Foundations for safe and agentic AI</h3>
+      <ul>
+        <li>Foundations of Safe AI across learning paradigms, including reinforcement and continual learning</li>
+        <li>Sequential decision-making under uncertainty, including Bayesian decision theory and POMDPs</li>
+        <li>Objective specification, reward design, and alignment for agentic systems</li>
+        <li>Test-time scaling, adaptive inference, and safety implications of increasingly capable agents</li>
+      </ul>
+      <h3>Uncertainty, robustness, and control</h3>
+      <ul>
+        <li>Uncertainty quantification, calibration, and propagation in decision-making</li>
+        <li>Risk-sensitive planning and long-horizon safety under uncertainty</li>
+        <li>Robustness to distribution shift, adversarial conditions, and non-stationary environments</li>
+        <li>Safety and control in RL-based agents, including safe exploration and learning-based control</li>
+      </ul>
+      <h3>Interpretability, auditing, and evaluation</h3>
+      <ul>
+        <li>Interpretability and explainability of agent policies, representations, and behaviors</li>
+        <li>Methods to audit, measure, monitor, and evaluate agentic AI systems</li>
+        <li>Benchmarks, metrics, and case studies for safe and aligned agents</li>
+        <li>Adversarial evaluation and stress testing of agentic systems, including red teaming</li>
+      </ul>
+      <h3>Engineering, deployment, and applications</h3>
+      <ul>
+        <li>Agent failure modes: reward hacking, goal misgeneralization, agent hijacking, and emergent behaviors</li>
+        <li>Human-in-the-loop and oversight mechanisms for agentic systems</li>
+        <li>Deployment-time safety of AI in safety-critical and autonomous systems</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- INVITED SPEAKERS -->
+  <div class="section" id="speakers">
+    <h2 class="sec-title">Invited speakers</h2>
+    <div class="speakers-list">
+      <div class="speaker-item">
+        <div class="s-avatar">TE</div>
+        <div class="s-info">
+          <strong>Tom Everitt</strong>
+          <span>Google DeepMind</span>
+        </div>
+      </div>
+      <div class="speaker-item">
+        <div class="s-avatar">NT</div>
+        <div class="s-info">
+          <strong>Niek Tax</strong>
+          <span>Meta, London</span>
+        </div>
+      </div>
+    </div>
+    <p class="more-speakers">More speakers to be announced.</p>
+
+    <h3 style="font-size:1rem;font-weight:500;color:var(--text-main);margin-top:2rem;margin-bottom:0.5rem;">Panel discussion</h3>
+    <div class="prose"><p>In-person speakers and leading researchers from academia and industry will discuss:</p></div>
+    <ul class="panel-list">
+      <li>Uncertainty and decision-making in autonomous agents</li>
+      <li>Interpretability and oversight for action-taking systems</li>
+      <li>Alignment and objective specification over long horizons</li>
+      <li>Scalable evaluation and control of agentic systems</li>
+    </ul>
+  </div>
+
+  <!-- MOTIVATION -->
+  <div class="section" id="motivation">
+    <h2 class="sec-title">Motivation</h2>
+    <div class="prose">
+      <p>
+        Ensuring the safety of AI systems has become a foundational challenge as they are increasingly deployed in high-stakes domains and subject to regulatory and societal expectations. Beyond accuracy and performance, <strong>Safe AI</strong> concerns reliability, robustness, interpretability, and alignment across the full system lifecycle.
+      </p>
+      <p>
+        This workshop focuses on technical and socio-technical challenges in Safe AI, with particular attention to <strong>agentic AI systems</strong> — learning-based systems that autonomously select actions, interact with an environment, and pursue objectives over time. In such systems, actions influence data, feedback, and behavior over extended horizons, making safety tightly linked to sequential decision-making, adaptation, and interaction. These challenges place uncertainty, robustness, and interpretability at the center of agentic safety, directly connecting them to foundational questions studied by the UAI community.
+      </p>
+    </div>
+  </div>
+
+  <!-- ORGANIZERS -->
+  <div class="section" id="organizers">
+    <h2 class="sec-title">Organizers</h2>
+    <div class="org-grid">
+      <div class="org-item">
+        <div class="org-photo" data-initials="MP">
+          <img src="images/organizers/mykola-pechenizkiy.jpg" alt="Mykola Pechenizkiy" onerror="this.style.display='none'">
+        </div>
+        <span class="org-role">Workshop Chair</span>
+        <strong>Mykola Pechenizkiy</strong>
+        <span>Eindhoven University of Technology, NL</span>
+      </div>
+      <div class="org-item">
+        <div class="org-photo" data-initials="CL">
+          <img src="images/organizers/christos-louizos.jpg" alt="Christos Louizos" onerror="this.style.display='none'">
+        </div>
+        <span class="org-role">Workshop Chair</span>
+        <strong>Christos Louizos</strong>
+        <span>Qualcomm AI Research, NL</span>
+      </div>
+      <div class="org-item">
+        <div class="org-photo" data-initials="YD">
+          <img src="images/organizers/yali-du.jpg" alt="Yali Du" onerror="this.style.display='none'">
+        </div>
+        <span class="org-role">Workshop Chair</span>
+        <strong>Yali Du</strong>
+        <span>King's College London, UK</span>
+      </div>
+      <div class="org-item">
+        <div class="org-photo" data-initials="EN">
+          <img src="images/organizers/eric-nalisnick.jpg" alt="Eric Nalisnick" onerror="this.style.display='none'">
+        </div>
+        <span class="org-role">Workshop Chair</span>
+        <strong>Eric Nalisnick</strong>
+        <span>Johns Hopkins University, US</span>
+      </div>
+      <div class="org-item">
+        <div class="org-photo" data-initials="EK">
+          <img src="images/organizers/emtiyaz-khan.jpg" alt="Emtiyaz Khan" onerror="this.style.display='none'">
+        </div>
+        <span class="org-role">Workshop Chair</span>
+        <strong>Emtiyaz Khan</strong>
+        <span>RIKEN AIP, Japan</span>
+      </div>
+      <div class="org-item">
+        <div class="org-photo" data-initials="AC">
+          <img src="images/organizers/alvaro-correia.jpg" alt="Alvaro H.C. Correia" onerror="this.style.display='none'">
+        </div>
+        <span class="org-role">Discussion Chair</span>
+        <strong>Alvaro H.C. Correia</strong>
+        <span>Qualcomm AI Research, NL</span>
+      </div>
+      <div class="org-item">
+        <div class="org-photo" data-initials="DT">
+          <img src="images/organizers/dharmesh-tailor.jpg" alt="Dharmesh Tailor" onerror="this.style.display='none'">
+        </div>
+        <span class="org-role">Discussion Chair</span>
+        <strong>Dharmesh Tailor</strong>
+        <span>Qualcomm AI Research, NL</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAM COMMITTEE -->
+  <div class="section" id="pc">
+    <h2 class="sec-title">Program committee</h2>
+    <div class="pc-placeholder">
+      Program committee members will be announced soon.
+    </div>
+  </div>
+
+</div><!-- end page-body -->
+
+<footer>
+  <p>SafeAI@UAI 2026 &nbsp;·&nbsp; Amsterdam, 21 August 2026</p>
+  <p style="margin-top:6px;">
+    Part of <a href="https://www.auai.org/uai2026/" target="_blank" rel="noopener">UAI 2026</a> &nbsp;·&nbsp;
+    Contact: <a href="mailto:m.pechenizkiy@tue.nl">m.pechenizkiy@tue.nl</a> &nbsp;·&nbsp;
+    Previous edition: <a href="https://sites.google.com/view/safeai2025/" target="_blank" rel="noopener">SafeAI@UAI 2025</a>
+  </p>
+  <p style="margin-top:6px;font-size:11px;opacity:0.6;">Hero photo by <a href="https://unsplash.com/@gauravjain" target="_blank" rel="noopener">Gaurav Jain</a> on Unsplash</p>
+</footer>
+
+</body>
+</html>
