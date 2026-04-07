@@ -335,18 +335,20 @@
   /* Speakers */
   .speakers-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.2rem;
     margin-top: 1.25rem;
   }
   .speaker-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.85rem;
+    text-align: center;
+    gap: 0.75rem;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
-    padding: 0.85rem 1.1rem;
+    border-radius: 16px;
+    padding: 1.4rem 1rem;
     transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
   }
   .speaker-item:hover {
@@ -356,8 +358,8 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
   }
   .s-avatar {
-    width: 48px;
-    height: 48px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.12);
@@ -369,6 +371,7 @@
     font-size: 15px;
     color: var(--cyan);
     flex-shrink: 0;
+    object-fit: cover;
   }
   .s-info strong { display: block; font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
   .s-info span { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; display: block; }
@@ -662,17 +665,17 @@
     <h2 class="sec-title">Invited speakers</h2>
     <div class="speakers-list">
       <div class="speaker-item">
-        <div class="s-avatar">TE</div>
+        <img class="s-avatar" src="images/speakers/tom-everitt.jpg" alt="Tom Everitt">
         <div class="s-info">
           <strong>Tom Everitt</strong>
           <span>Google DeepMind</span>
         </div>
       </div>
       <div class="speaker-item">
-        <div class="s-avatar">NT</div>
+        <img class="s-avatar" src="images/speakers/niek-tax.jpg" alt="Niek Tax">
         <div class="s-info">
           <strong>Niek Tax</strong>
-          <span>Meta, London</span>
+          <span>Meta</span>
         </div>
       </div>
     </div>
