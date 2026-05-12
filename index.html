@@ -305,6 +305,43 @@
   .prose a { color: var(--accent-light); text-decoration: none; transition: color 0.2s; }
   .prose a:hover { color: #ffc090; text-decoration: underline; }
 
+  /* Sponsors */
+  .sponsor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+  .sponsor-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.94);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+  .sponsor-card:hover {
+    background: #fff;
+    border-color: rgba(240,115,64,0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18), 0 0 0 1px rgba(240,115,64,0.15);
+  }
+  .sponsor-card:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 4px;
+  }
+  .sponsor-card img {
+    display: block;
+    max-width: 100%;
+    max-height: 105px;
+    object-fit: contain;
+  }
+  .sponsor-card.safeai img { max-height: 112px; }
+
   /* Deadlines table */
   .dates-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
   .dates-table tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
@@ -563,10 +600,11 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#dates">Dates</a></li>
-    <li><a href="#speakers">Speakers</a></li>
     <li><a href="#submission">Call for Papers</a></li>
+    <li><a href="#speakers">Speakers</a></li>
     <li><a href="#organizers">Organizers</a></li>
     <li><a href="#pc">PC</a></li>
+    <li><a href="#sponsors">Sponsors</a></li>
   </ul>
 </nav>
 
@@ -599,7 +637,7 @@
 </header>
 
 <!-- Intro blurb -->
-<div class="intro-blurb">
+<div class="intro-blurb" id="about">
   We are pleased to announce the <strong>2nd Workshop on Safe AI (SafeAI)</strong>, held as part of <a href="https://www.auai.org/uai2026/" target="_blank" rel="noopener">UAI 2026</a> in Amsterdam. This year's edition focuses on <strong>safety challenges in agentic AI</strong> — systems that autonomously act, adapt, and interact over extended horizons. The workshop features invited talks, a panel discussion, and contributed papers spanning foundations, robustness, interpretability, and deployment of safe AI systems.
 </div>
 
@@ -853,6 +891,20 @@
       <li><strong>Andrea Wynn</strong>, Johns Hopkins University, USA</li>
       <li><strong>Chi Zhang</strong>, Johns Hopkins University, USA</li>
     </ul>
+  </div>
+
+  <!-- SPONSORS -->
+  <div class="section" id="sponsors">
+    <h2 class="sec-title">Sponsors</h2>
+    <div class="prose"><p>We gratefully acknowledge support from our sponsors.</p></div>
+    <div class="sponsor-grid">
+      <a class="sponsor-card safeai" href="https://safeai.nl" target="_blank" rel="noopener" aria-label="Visit the Center for Safe AI website">
+        <img src="images/sponsors/center-for-safe-ai.jpg" alt="Center for Safe AI">
+      </a>
+      <a class="sponsor-card" href="https://siks.nl" target="_blank" rel="noopener" aria-label="Visit the SIKS website">
+        <img src="images/sponsors/siks.jpg" alt="SIKS">
+      </a>
+    </div>
   </div>
 
 </div><!-- end page-body -->
