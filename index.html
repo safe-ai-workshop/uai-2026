@@ -573,6 +573,63 @@
     margin-top: 0.5rem;
   }
 
+  /* Accepted papers */
+  .papers-count {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(34,211,238,0.1);
+    border: 1px solid rgba(34,211,238,0.2);
+    color: var(--cyan);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  .papers-note {
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 12px;
+    background: rgba(240,115,64,0.07);
+    border: 1px solid rgba(240,115,64,0.18);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .papers-note strong { color: var(--text-main); font-weight: 500; }
+  .papers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+  .paper-item {
+    padding: 1.1rem 1.3rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .paper-item:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .paper-title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin-bottom: 0.3rem;
+  }
+  .paper-authors {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
   /* FOOTER */
   footer {
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -602,6 +659,7 @@
     <li><a href="#dates">Dates</a></li>
     <li><a href="#submission">Call for Papers</a></li>
     <li><a href="#speakers">Speakers</a></li>
+    <li><a href="#papers">Papers</a></li>
     <li><a href="#organizers">Organizers</a></li>
     <li><a href="#pc">PC</a></li>
     <li><a href="#sponsors">Sponsors</a></li>
@@ -783,6 +841,156 @@
       <li>Alignment and objective specification over long horizons</li>
       <li>Scalable evaluation and control of agentic systems</li>
     </ul>
+  </div>
+
+  <!-- ACCEPTED PAPERS -->
+  <div class="section" id="papers">
+    <h2 class="sec-title">Accepted papers <span class="papers-count">35 papers</span></h2>
+    <div class="papers-note">
+      <strong>Note:</strong> Camera-ready versions of the papers will be made available here soon.
+    </div>
+    <div class="papers-list">
+      <div class="paper-item">
+        <span class="paper-title">A Translational Note on AI Safety Evaluation</span>
+        <span class="paper-authors">Madhava Gaikwad</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Agentic Scaffolding Amplifies Sycophantic Behavior in Large Language Models</span>
+        <span class="paper-authors">Thantham Jittham</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Argument Integrity for LLM Agents: Securing Authority-Bearing Tool Parameters</span>
+        <span class="paper-authors">Hikaru Matsuoka</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Attestation-Aware Disaggregated Inference: Securing the KV Cache Supply Chain in LLM Serving</span>
+        <span class="paper-authors">Suma Kasa</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Auditable Memory as a Safety Requirement for Agentic AI</span>
+        <span class="paper-authors">Marcel Osmond</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Authority Firewall: A Latent-Space Defense Against Prompt Injection and Agent Hijacking</span>
+        <span class="paper-authors">Cynthia Lambov, Aleksandar Slavov</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Automating AI Research Poses Novel Risks</span>
+        <span class="paper-authors">Simon Lermen</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification</span>
+        <span class="paper-authors">Sarah Wilson, Usman Ali Moazzam, Diem Linh Dang, Shan Ye</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Calibrate-Then-Delegate: Safety Monitoring with Risk and Budget Guarantees via Model Cascades</span>
+        <span class="paper-authors">Edoardo Pona, Milad Kazemi, Mehran Hosseini, Yali Du, David Watson, Osvaldo Simeone, Nicola Paoletti</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">CARE-Fin: A Causal-Aware and Robust Meta-Learning Framework for Safe and Reliable SME Financial Decision-Making</span>
+        <span class="paper-authors">Zhen Yang, Zhiguo Tao</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">COATUQ: Correlation-Aware Calibration of Predictive Uncertainty in Offline Reinforcement Learning</span>
+        <span class="paper-authors">Zixuan Wang, Floris den Hengst</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Defending Embodied AI Against Multi-Turn Adversarial Attacks via Constitutional Safety</span>
+        <span class="paper-authors">Charan Sai Soma, Oliver Lemon</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Early Stopping of Neural Sequence Model Training Based on Representation Structural Uncertainty</span>
+        <span class="paper-authors">Zamotaev Rodion Sergeevich, Natalia Gusarova, Ivan Tomilov, Aleksandra Vatian</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Estimating Problem Difficulty Without Ground Truth Using Large Language Model Comparisons</span>
+        <span class="paper-authors">Marthe Ballon, Andres Algaba, Brecht F. Verbeken, Vincent Ginis</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">From Model Evaluation to System Assurance: Agentic AI Safety in Four Layers</span>
+        <span class="paper-authors">Carla Janaina Ferreira, Juan Camilo Guevara Gomez</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Geometric Configurations of Perturbed Jailbreak Prompts</span>
+        <span class="paper-authors">Lynn Delcon, Andres Algaba, Vincent Ginis</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Hidden in Plain Sight: Why Accuracy Masks Bias Drift in Machine Learning</span>
+        <span class="paper-authors">Aishika Manu</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Learning Nonlinear Causal Reductions to Explain Reinforcement Learning Policies</span>
+        <span class="paper-authors">Armin Kekić, Jan Schneider, Dieter Büchler, Bernhard Schölkopf, Michel Besserve</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Lexical Hints of Accuracy in LLM Reasoning Chains</span>
+        <span class="paper-authors">Arne Vanhoyweghen, Brecht F. Verbeken, Andres Algaba, Vincent Ginis</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">LLM-Distilled Feasibility Estimation with Validity Routing for Safe Symbolic Robot Skills</span>
+        <span class="paper-authors">Yuanhang Ling</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">MMD-Flagger: Leveraging Maximum Mean Discrepancy to Detect Hallucinations</span>
+        <span class="paper-authors">Kensuke Mitsuzawa, Damien Garreau</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">On the QUEST for Uncertainty Quantification via Highest Density Regions</span>
+        <span class="paper-authors">Sam Goring, Tom Kuipers, Nicola Paoletti, David Watson</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Online Safety Monitoring for LLMs</span>
+        <span class="paper-authors">Mona Schirmer, Metod Jazbec, Alexander Timans, Christian A. Naesseth, Maja Waldron, Eric Nalisnick</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Optimal Loss-Aware Abstention Thresholds for Language Models</span>
+        <span class="paper-authors">Shreya Sharma, Dhanshri Ahir</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Probing the Trajectories of Reasoning Traces in Large Language Models</span>
+        <span class="paper-authors">Marthe Ballon, Brecht F. Verbeken, Vincent Ginis, Andres Algaba</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Robust Risk Under Evolving Uncertainty: A Wasserstein Counterpart of the Entropic Value-at-Risk</span>
+        <span class="paper-authors">Deep Kumar Ganguly, Jan Kretinsky</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Safety-Anchored Fine-Tuning: Diagnosing and Preventing Safety Collapse in Large Language Models via Adversarial Alignment Anchoring</span>
+        <span class="paper-authors">Kush Patil, Mohammad Kadiri</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Structurally Human, Semantically Biased: Detecting LLM-Generated References with Embeddings and GNNs</span>
+        <span class="paper-authors">Melika Mobini, Vincent Holst, Floriano Tori, Andres Algaba, Vincent Ginis</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">The Science and Practice of Proportionality in AI Risk Evaluations</span>
+        <span class="paper-authors">Carlos Mougan, Lauritz Morlock</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Thinking Like a Scientist? A Structural Study of LLM-Generated Research Methods</span>
+        <span class="paper-authors">Francesca Carlon, Brecht F. Verbeken, Vincent Ginis, Andres Algaba</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Toward Iterative Safe Policy Improvement</span>
+        <span class="paper-authors">Adi Watzman, Floris den Hengst, Thiago D. Simão, Herke van Hoof</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">TRIDENT: A Triple-Layer Defense-in-Depth Framework for Provable Safety in LLM-Driven Embodied Agents</span>
+        <span class="paper-authors">Ananthapadmanabhan Manoj, Oliver Lemon</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">Underspecified, Not Uncertain: Context Ambiguity Versus Knowledge Gaps in Safety-Critical LLM Use</span>
+        <span class="paper-authors">Sara El Mekkaoui, Anuja Vats, Juan Camilo Guevara Gomez, Aleksandar Babic</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">When Robots Mishear Us: Mapping the Safety Risks of Voice-Controlled Embodied AI</span>
+        <span class="paper-authors">Sihan Jia, Oliver Lemon</span>
+      </div>
+      <div class="paper-item">
+        <span class="paper-title">When Truncation Is Not the Bottleneck: An Equivalence-Testing Audit of API Logprob Calibration in Forced Multiple-Choice QA</span>
+        <span class="paper-authors">Rob Sneiderman</span>
+      </div>
+    </div>
   </div>
 
   <!-- MOTIVATION -->
