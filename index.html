@@ -630,18 +630,55 @@
     line-height: 1.5;
   }
   .paper-video {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 0.5rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent-light);
+    gap: 0.7rem;
+    margin-top: 0.85rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: 10px;
     text-decoration: none;
-    transition: color 0.2s;
+    background: linear-gradient(90deg, rgba(240,115,64,0.16), rgba(240,115,64,0.06));
+    border: 1px solid rgba(240,115,64,0.3);
+    transition: background 0.2s, border-color 0.2s;
   }
-  .paper-video:hover { color: #ffc090; text-decoration: underline; }
-  .paper-video svg { flex-shrink: 0; }
+  .paper-video:hover {
+    background: linear-gradient(90deg, rgba(240,115,64,0.24), rgba(240,115,64,0.1));
+    border-color: rgba(240,115,64,0.5);
+  }
+  .pv-thumb {
+    flex-shrink: 0;
+    position: relative;
+    width: 108px;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0d1f33;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .pv-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pv-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(240,115,64,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    transition: transform 0.18s, background 0.2s;
+  }
+  .paper-video:hover .pv-play { transform: translate(-50%,-50%) scale(1.1); background: var(--accent); }
+  .pv-thumb.noimg { background: linear-gradient(180deg, var(--accent), #d85a2a); }
+  .pv-thumb.noimg img { display: none; }
+  .pv-main { flex: 1; }
+  .pv-label { display: block; font-size: 0.83rem; font-weight: 600; color: var(--text-main); }
+  .pv-sub { display: block; font-size: 0.72rem; color: var(--text-secondary); }
+  .pv-arrow { color: var(--accent-light); font-size: 0.9rem; }
 
   /* FOOTER */
   footer {
@@ -895,8 +932,15 @@
         <span class="paper-title">Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification</span>
         <span class="paper-authors">Sarah Wilson, Usman Ali Moazzam, Diem Linh Dang, Shan Ye, Gail Kaiser</span>
         <a class="paper-video" href="https://www.youtube.com/watch?v=37DonHgVvss" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          Watch video ↗
+          <span class="pv-thumb">
+            <img src="https://i.ytimg.com/vi/37DonHgVvss/hqdefault.jpg" alt="" onerror="this.parentNode.classList.add('noimg')">
+            <span class="pv-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+          <span class="pv-main">
+            <span class="pv-label">Watch the talk</span>
+            <span class="pv-sub">Recorded presentation on YouTube</span>
+          </span>
+          <span class="pv-arrow">↗</span>
         </a>
       </div>
       <div class="paper-item">
