@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program — SafeAI@UAI 2026</title>
+<meta name="description" content="Program for the 2nd Workshop on Safe AI at UAI 2026 in Amsterdam, Friday, 21 August 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #080f1a;
+    --navy-mid: #0f1e30;
+    --accent: #f07340;
+    --accent-light: #f9a06a;
+    --cyan: #22d3ee;
+    --border: rgba(255,255,255,0.06);
+    --border-accent: rgba(255,255,255,0.08);
+    --card-bg: rgba(14,22,36,0.55);
+    --text-main: #eef2f6;
+    --text-secondary: #94aabf;
+    --muted: #6a7a8a;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--navy);
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(34,211,238,0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(240,115,64,0.03) 0%, transparent 40%),
+      radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 32px 32px;
+    color: var(--text-main);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,15,26,0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    opacity: 0.9;
+  }
+  .nav-links { display: flex; gap: 0; list-style: none; }
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 0 0.75rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: #fff; border-bottom-color: rgba(255,255,255,0.4); }
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 92px 2rem 74px;
+    text-align: center;
+    background: url('images/hero.jpg') center/cover no-repeat;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8,15,26,0.45), rgba(8,15,26,0.82));
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+    backdrop-filter: blur(4px);
+  }
+  h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #fff;
+  }
+  .hero-meta { color: rgba(255,255,255,0.84); font-size: 1.05rem; margin-top: 0.65rem; }
+  .page-body { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+  .section {
+    padding: 2.8rem 2.2rem;
+    border: 1px solid var(--border-accent);
+    border-radius: 20px;
+    margin-top: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 200%; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 75%, transparent 100%);
+    animation: shimmer 8s linear infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.45rem;
+    line-height: 1.25;
+  }
+  .intro { color: var(--text-secondary); font-size: 0.97rem; margin-bottom: 1.4rem; }
+  .program-table { width: 100%; border-collapse: collapse; }
+  .program-table th {
+    padding: 0 0 0.65rem;
+    color: var(--muted);
+    font-size: 0.73rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .program-table th:first-child, .program-table td.time { width: 138px; }
+  .program-table th:nth-child(2), .program-table td.session { width: 162px; }
+  .program-table th:nth-child(3), .program-table td.format { width: 92px; }
+  .program-table tr { border-top: 1px solid var(--border); }
+  .program-table td {
+    padding: 1rem 0.7rem 1rem 0;
+    vertical-align: top;
+    color: var(--text-secondary);
+    font-size: 0.93rem;
+    line-height: 1.5;
+  }
+  .program-table td.time { color: var(--accent-light); font-weight: 500; white-space: nowrap; }
+  .program-table td.session { color: var(--text-main); font-weight: 500; }
+  .program-table td.format { color: var(--cyan); font-size: 0.84rem; }
+  .talk-title { display: block; color: var(--text-main); font-weight: 500; }
+  .speaker { display: block; margin-top: 0.15rem; color: var(--text-secondary); }
+  .program-table tr.break-row { background: rgba(34,211,238,0.045); }
+  .program-table tr.lunch-row { background: rgba(240,115,64,0.06); }
+  .program-table tr.break-row td, .program-table tr.lunch-row td { padding-top: 0.78rem; padding-bottom: 0.78rem; }
+  .program-table td.event { color: var(--text-main); font-weight: 500; }
+  .program-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.1rem;
+    border-radius: 12px;
+    background: rgba(240,115,64,0.07);
+    border: 1px solid rgba(240,115,64,0.18);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+  .program-note strong { color: var(--text-main); font-weight: 500; }
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 3rem;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer p + p { margin-top: 6px; }
+  .photo-credit { font-size: 11px; opacity: 0.6; }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hero { padding: 68px 1.25rem 56px; }
+    .page-body { padding: 0 1.25rem; }
+    .section { padding: 2rem 1.25rem; }
+    .program-table thead { display: none; }
+    .program-table, .program-table tbody { display: block; }
+    .program-table tr {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      column-gap: 0.7rem;
+      padding: 0.9rem 0;
+    }
+    .program-table td { display: block; padding: 0; }
+    .program-table td.time {
+      grid-column: 1;
+      grid-row: 1 / span 3;
+      width: auto;
+      font-size: 0.86rem;
+    }
+    .program-table td.session { grid-column: 2; width: auto; }
+    .program-table td.format { grid-column: 2; width: auto; margin-top: 0.12rem; }
+    .program-table td.details { grid-column: 2; margin-top: 0.28rem; }
+    .program-table tr.break-row, .program-table tr.lunch-row { display: grid; }
+    .program-table td.event { grid-column: 2; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">SafeAI@UAI 2026</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="program.html" aria-current="page">Program</a></li>
+    <li><a href="index.html#dates">Dates</a></li>
+    <li><a href="index.html#submission">Call for Papers</a></li>
+    <li><a href="index.html#speakers">Speakers</a></li>
+    <li><a href="index.html#papers">Papers</a></li>
+    <li><a href="index.html#organizers">Organizers</a></li>
+    <li><a href="index.html#pc">PC</a></li>
+    <li><a href="index.html#sponsors">Sponsors</a></li>
+  </ul>
+</nav>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">UAI 2026 Workshop &nbsp;·&nbsp; Amsterdam</div>
+    <h1>Program</h1>
+    <p class="hero-meta">Friday, 21 August 2026 &nbsp;·&nbsp; Full-day workshop</p>
+  </div>
+</header>
+<main class="page-body">
+  <section class="section" aria-labelledby="program-title">
+    <h2 id="program-title">Workshop program</h2>
+    <p class="intro">Friday, 21 August 2026</p>
+    <table class="program-table">
+      <thead>
+        <tr>
+          <th scope="col">Time</th>
+          <th scope="col">Session</th>
+          <th scope="col">Format</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">09:00 – 09:05</td>
+          <td class="session">Opening remarks</td>
+          <td class="format">In person</td>
+          <td class="details"></td>
+        </tr>
+        <tr>
+          <td class="time">09:05 – 09:30</td>
+          <td class="session">Invited talk 1</td>
+          <td class="format">Virtual</td>
+          <td class="details"><span class="talk-title">Agent Arena: Causal Evaluations of Agents in the Real World</span><span class="speaker">Anastasios Angelopoulos</span></td>
+        </tr>
+        <tr>
+          <td class="time">09:30 – 10:00</td>
+          <td class="session">Invited talk 2</td>
+          <td class="format">In person</td>
+          <td class="details"><span class="talk-title">Towards Causal Foundations of Safe AGI</span><span class="speaker">Tom Everitt</span></td>
+        </tr>
+        <tr class="break-row">
+          <td class="time">10:00 – 10:30</td>
+          <td class="event" colspan="3">Coffee break</td>
+        </tr>
+        <tr>
+          <td class="time">10:30 – 11:00</td>
+          <td class="session">Poster session 1</td>
+          <td class="format">In person</td>
+          <td class="details"></td>
+        </tr>
+        <tr>
+          <td class="time">11:00 – 11:30</td>
+          <td class="session">Invited talk 3</td>
+          <td class="format">In person</td>
+          <td class="details"><span class="talk-title">Runtime Governance for AI Agents: Policies on Paths</span><span class="speaker">Prof. Maurits Kaptein</span></td>
+        </tr>
+        <tr>
+          <td class="time">11:30 – 12:00</td>
+          <td class="session">Invited talk 4</td>
+          <td class="format">In person</td>
+          <td class="details"><span class="talk-title">Standardized evaluations to support responsible growth of AI markets</span><span class="speaker">Peter Mattson</span></td>
+        </tr>
+        <tr class="lunch-row">
+          <td class="time">12:00 – 14:00</td>
+          <td class="event" colspan="3">Lunch break (on your own)</td>
+        </tr>
+        <tr>
+          <td class="time">14:00 – 15:00</td>
+          <td class="session">Panelists pitches</td>
+          <td class="format">In person</td>
+          <td class="details"></td>
+        </tr>
+        <tr>
+          <td class="time">15:00 – 15:30</td>
+          <td class="session">Panel discussion</td>
+          <td class="format">In person</td>
+          <td class="details"></td>
+        </tr>
+        <tr class="break-row">
+          <td class="time">15:30 – 16:00</td>
+          <td class="event" colspan="3">Coffee break</td>
+        </tr>
+        <tr>
+          <td class="time">16:00 – 17:00</td>
+          <td class="session">Poster session 2</td>
+          <td class="format">In person</td>
+          <td class="details"></td>
+        </tr>
+        <tr>
+          <td class="time">17:00 – 17:30</td>
+          <td class="session">Invited talk 5</td>
+          <td class="format">In person</td>
+          <td class="details"><span class="talk-title">Hallucinations, jailbreaks, and beyond</span><span class="speaker">Prof. Yarin Gal</span></td>
+        </tr>
+        <tr>
+          <td class="time">17:30 – 18:00</td>
+          <td class="session">Closing remarks</td>
+          <td class="format">In person</td>
+          <td class="details"></td>
+        </tr>
+      </tbody>
+    </table>
+    <aside class="program-note">
+      <strong>Note:</strong> The schedule is tentative and subject to minor changes. Accepted papers are welcome to be presented during the poster sessions; please bring a printed poster if you plan to present. Posters may be any format up to A0 portrait maximum.
+    </aside>
+  </section>
+</main>
+<footer>
+  <p>SafeAI@UAI 2026 &nbsp;·&nbsp; Amsterdam, 21 August 2026</p>
+  <p>Part of <a href="https://www.auai.org/uai2026/" target="_blank" rel="noopener">UAI 2026</a> &nbsp;·&nbsp; Contact: <a href="mailto:safeAI.uai2026@gmail.com">safeAI.uai2026@gmail.com</a></p>
+  <p class="photo-credit">Hero photo by <a href="https://unsplash.com/@gauravjain" target="_blank" rel="noopener">Gaurav Jain</a> on Unsplash</p>
+</footer>
+</body>
+</html>
